@@ -1,0 +1,217 @@
+[colors]
+background = ${xrdb:color1:#332222}
+foreground = ${xrdb:color7:#fafafa}
+
+color2 = ${xrdb:color2:#dadada}
+color3 = ${xrdb:color3:#dadada}
+color4 = ${xrdb:color4:#dadada}
+color5 = ${xrdb:color5:#dadada}
+color6 = ${xrdb:color6:#dadada}
+
+[defaults]
+font-0 = fixed:pixelsize=10;2
+font-1 = "Font Awesome 5 Free:style=Solid:size=10;2"
+font-2 = "Font Awesome 5 Free:style=Regular:size=10;2"
+font-3 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-4 = siji:pixelsize=10;1
+font-5 = HanaMinA:pixelsize=10;1
+
+width = 40%
+height = 27
+radius = 10.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+border-size = 4
+border-color = #00000000
+
+padding-left = 1
+padding-right = 1
+module-margin-left = 1
+module-margin-right = 1
+
+wm-restack = bspwm
+cursor-click = default
+enable-ipc = true
+
+[bar/left]
+inherit = defaults
+
+modules-left = start xwindow
+modules-center = mpd
+modules-right = wlan date utctime
+
+[bar/right]
+inherit = defaults
+
+offset-x = 60%
+
+modules-left = bspwm
+modules-center =
+modules-right = filesystem radeontop cpu memory battery
+
+tray-position = center
+tray-padding = 2
+tray-background = ${colors.background}
+
+[module/xwindow]
+type = internal/xwindow
+format = <label>
+
+label = "%{A}%{A1:bspc node -c:}%{A} %title%"
+label-maxlen = 56
+
+label-empty = ""
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+
+label-mounted =  %free%
+label-unmounted = ""
+
+[module/bspwm]
+type = internal/bspwm
+
+pin-workspaces = false
+
+label-focused = ⬙
+label-focused-padding = 2
+
+label-occupied = ◆
+label-occupied-padding = 2
+
+label-urgent = ⬘
+label-urgent-padding = 2
+
+label-empty = ◇
+label-empty-padding = 2
+
+[module/mpd]
+type = internal/mpd
+format-online = "%{A1:mpc toggle:}<label-song>%{A}"
+
+label-song = "%title%"
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+
+label =  %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = " %essid% "
+
+format-disconnected = <label-disconnected>
+label-disconnected = 
+label-disconnected-foreground = ${colors.foreground-alt}
+
+
+ramp-signal-0 = 
+ramp-signal-0-foreground = ${colors.color2}
+ramp-signal-1 = 
+ramp-signal-1-foreground = ${colors.color3}
+ramp-signal-2 = 
+ramp-signal-2-foreground = ${colors.color4}
+ramp-signal-3 = 
+ramp-signal-3-foreground = ${colors.color5}
+ramp-signal-4 = 
+ramp-signal-4-foreground = ${colors.color6}
+
+[module/eth]
+type = internal/network
+interface = eth0
+interval = 5.0
+
+format-connected-prefix = " "
+label-connected = "%local_ip% "
+
+format-disconnected = <label-disconnected>
+label-disconnected = 
+label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M
+time-alt = %H:%M
+
+format-prefix =
+format-prefix-foreground = ${colors.foreground}
+
+label = "%time%"
+
+[module/utctime]
+type = custom/script
+interval = 5
+
+format-prefix = ""
+format-prefix-foreground = ${colors.foreground}
+
+exec = TZ='Europe/London' date +%H:%M
+
+[module/radeontop]
+type = custom/script
+interval = 5
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+
+exec = radeontop -l1 -d - | sed "s/.*gpu \([0-9]\{1,3\}\)\.[0-9]\{1,2\}\%,.*/\1\%/g" | tail -n1
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <label-charging>
+label-charging = " +%percentage%% "
+
+format-discharging = <label-discharging>
+label-discharging = " -%percentage%% "
+
+format-full = ""
+format-full-foreground = ${colors.foreground}
+
+[module/start]
+type = custom/text
+
+content = "%{A1:rofi -show drun:} ❖%{A}"
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = -3
+
+; vim:ft=dosini

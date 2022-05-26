@@ -1,0 +1,74 @@
+# Essentials
+super + Escape
+	pkill -USR1 -x sxhkd
+super + {_,shift + } Return
+	{kitty,pcmanfm}
+super + {_,shift + }q
+	bspc node -{c,k}
+super + alt + Escape
+	killall -u $USER && bspc quit
+# Rofi
+super + d
+	rofi -show drun
+# Screenshots
+@Print + {_,shift,ctrl}
+	sh ${HOME}/bin/scripts/scrot.sh {'screen','focused','select'}
+
+# MPD Control
+ctrl + alt + {a,d,w,s,space}
+	mpc {prev,next,volume +2, volume -2,toggle}
+# MPRIS Control
+shift + alt + {a,d,w,s,space}
+	playerctl {previous,next,volume +2, volume -2, play-pause}
+
+# Dunst
+super + {_,shift} + grave
+	dunstctl {close,history-pop}
+
+# Lock
+super + Scroll_Lock
+	dm-tool lock
+
+# Window Management
+super + shift + l; {m,t}
+    bspc desktop -l {monocle,tiled}
+
+super + {t,@space, f, shift + t}
+	bspc node -t {tiled, floating, fullscreen, pseudo_tiled}
+super + {_, shift +} {1,2,3,4,z,x}
+	bspc {desktop -f, node -d} {1,2,3,4,5,6}
+super + {_, shift} + {Left,Right,Up,Down}
+	bspc node -{f,s} {west,east,north,south}
+super + alt + {Left,Right,Up,Down}
+	bspc node -p {west,east,north,south}
+super + alt + space
+	bspc node -p cancel
+super + ctrl + alt + {Left,Right,Up,Down}
+	bspc node -z {left -20 0, right 20 0, top 0 -20, bottom 0 20}
+super + ctrl + alt + shift + {Left,Right,Up,Down}
+	bspc node -z {right -20 0, left 20 0, top 0 20, bottom 0 -20}
+super + {_, shift + } c
+	bspc node -f {next,prev}.local.!hidden.window
+
+super + {_, shift + } h
+    bspc node {@focused:/.\!hidden -g hidden=on, @focused:/.hidden.\!focused -g hidden=off}
+
+# Fun
+super + {0,9}
+	bspc config window_gap {0,4}
+super + {7,8}
+	bspc config split_ratio {0.5,0.602}
+super + v
+	sh ${HOME}/bin/scripts/background.sh rand
+super + b
+	polybar-msg cmd hide && bspc config top_padding 0
+super + shift + b
+	polybar-msg cmd show
+
+# Lamp Control
+ctrl + shift + {Prior, Next, Home, Delete, Insert, End}
+	python $HOME/bin/scripts/lamp.py {desk offset 20, desk offset -20, desk toggle, ceiling offset -20, ceiling offset 20, ceiling toggle}
+
+# DisplayPort-1 Rotation
+super + r; {Up,Right}
+	xrandr --output DisplayPort-1 --rotate {normal,right} && sh $HOME/bin/scripts/background.sh last

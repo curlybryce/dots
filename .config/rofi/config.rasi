@@ -1,0 +1,42 @@
+configuration {
+	modi: "drun,filebrowser,powermenu:~/bin/scripts/rofi/powermenu.sh";
+	font: "Go Mono 12";
+	location: 1;
+	yoffset: 36;
+	xoffset: 4;
+	show-icons: true;
+	sidebar-mode: true;
+	scroll-method: 1;
+	me-accept-entry: "MousePrimary";
+	me-select-entry: "";
+
+	display-drun: " Apps";
+	display-filebrowser: " Files";
+	display-window: " Windows";
+	display-powermenu: " Power";
+
+	pid: "/run/user/1000/rofi.pid";
+
+	timeout {
+		delay: 10;
+		action: "kb-cancel";
+	}
+
+    kb-mode-next: "Super+Right";
+    kb-mode-previous: "Super+Left";
+
+}
+@import "~/.cache/wal/colors-rofi-dark-color.rasi"
+
+listview {
+	columns: 1;
+}
+
+window {
+	width: 20%;
+	height: 30%;
+	border-radius: 6px;
+}
+#window {
+  padding: 1ch;
+}
