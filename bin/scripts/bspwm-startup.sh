@@ -1,7 +1,8 @@
 #!/bin/sh
 # Lists
+
 active_functions=("background" "input" "monitor" "mpdstart" "variables" "bar" "applications")
-startup_applications=("picom" "sxhkd" "pcmanfm -d"  "syncthing -no-browser" "kdeconnect-indicator" "keepassxc" "copyq")
+startup_applications=("picom" "sxhkd" "pcmanfm -d"  "syncthing -no-browser" "kdeconnect-indicator" "keepassxc" "copyq" "blanket -h")
 
 ## Run background script
 function background() {

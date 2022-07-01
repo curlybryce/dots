@@ -6,6 +6,7 @@ dots_list=(
   "bin/scripts/background.sh"
   "bin/scripts/dothelper.sh"
   "bin/scripts/rofi/powermenu.sh"
+  ".config/bspwm/bspwmrc"
   ".config/polybar/config"
   ".config/sxhkd/sxhkdrc"
   ".config/rofi/config.rasi"

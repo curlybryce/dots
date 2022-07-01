@@ -10,11 +10,12 @@ color6 = ${xrdb:color6:#dadada}
 
 [defaults]
 font-0 = fixed:pixelsize=10;2
-font-1 = "Font Awesome 5 Free:style=Solid:size=10;2"
-font-2 = "Font Awesome 5 Free:style=Regular:size=10;2"
+font-1 = "Font Awesome 5 Free:style=Solid:size=10;2.5"
+font-2 = "Font Awesome 5 Free:style=Regular:size=10;2.5"
 font-3 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-4 = siji:pixelsize=10;1
-font-5 = HanaMinA:pixelsize=10;1
+font-5 = HanaMinA:pixelsize=10:weight=bold;2
+font-6 = fixed:weight=bold:pixelsize=10;2
 
 width = 40%
 height = 27
@@ -95,7 +96,7 @@ label-empty-padding = 2
 
 [module/mpd]
 type = internal/mpd
-format-online = "%{A1:mpc toggle:}<label-song>%{A}"
+format-online = "%{A1:mpc prev:} %{T7}%{A}%{A1:mpc toggle:}<label-song>%{A}%{T-}%{A1:mpc next:} %{A}"
 
 label-song = "%title%"
 label-song-maxlen = 25
